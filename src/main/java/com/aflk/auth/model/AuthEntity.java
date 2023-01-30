@@ -5,18 +5,20 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity(name = "TB_AUTH")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 @EqualsAndHashCode(callSuper=false)
+@Entity(name = "TB_AUTH")
 public class AuthEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
-    private Long id;
-    private String name;
+    private Long authCd;
+
+    private String authType;
+
     @JoinColumn(name = "userCd")
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore

@@ -1,41 +1,52 @@
 package com.aflk.auth.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-@Entity(name = "TB_USER")
-@Data
+@DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
-@EqualsAndHashCode(callSuper=false)
+@Entity(name = "TB_USER")
 public class UserEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userCd")
-    private long userCd;
+    private Long userCd;
 
-    @Column(name = "domainCd", nullable = false)
+    @Column(name = "domainCd")
+    @ColumnDefault("1")
     private String domainCd;
 
-    @Column(name = "userID",nullable = false)
+    @Column(name = "userID", nullable = false)
     private String userId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "userPW")
+    @Column(name = "userPW", nullable = false)
     private String userPw;
 
     @Column(name = "userType",nullable = true)
+    @ColumnDefault("1")
     private String userType;
 
     @Column(name = "userStatus",nullable = true)
+    @ColumnDefault("1")
     private String userStatus;
 
-    @Column(name = "userNM",nullable = true)
+    @Column(name = "userNm",nullable = false)
     private String userNm;
+
+    @Column(name = "userPhoneNo",nullable = false)
+    private String userPhoneNo;
 
     @Column(name = "userNickNm",nullable = true)
     private String userNickNm;

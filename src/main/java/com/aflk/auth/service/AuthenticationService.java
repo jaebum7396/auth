@@ -1,7 +1,10 @@
 package com.aflk.auth.service;
 
 import com.aflk.auth.jwt.JwtProvider;
-import com.aflk.auth.model.*;
+import com.aflk.auth.model.CustomUserDetails;
+import com.aflk.auth.model.LoginRequest;
+import com.aflk.auth.model.ResponseResult;
+import com.aflk.auth.model.UserEntity;
 import com.aflk.auth.repository.AuthenticationRepository;
 import com.aflk.auth.utils.AES128Util;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +28,8 @@ import java.util.Map;
 public class AuthenticationService implements UserDetailsService {
     @Autowired
     AuthenticationRepository authenticationRepository;
-    @Autowired PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired JwtProvider jwtProvider;
     private final AES128Util aes128Util = new AES128Util();
     public ResponseEntity login(LoginRequest loginRequest) throws Exception {

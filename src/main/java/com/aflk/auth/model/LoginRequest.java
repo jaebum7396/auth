@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class LoginRequest {
-    @ApiModelProperty(value="userId", example="", required=true)
+    @ApiModelProperty(value="userId", example="gildongh0366", required=true)
     private String userId;
-    @ApiModelProperty(value="userPw", example="", required=true)
+    @ApiModelProperty(value="userPw", example="pwd0366", required=true)
     private String userPw;
 }
