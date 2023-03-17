@@ -1,4 +1,4 @@
-package com.aflk.auth.utils;
+package auth.utils;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 

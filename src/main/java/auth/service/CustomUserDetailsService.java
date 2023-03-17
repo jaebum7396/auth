@@ -1,8 +1,8 @@
-package com.aflk.auth.service;
+package auth.service;
 
-import com.aflk.auth.model.CustomUserDetails;
-import com.aflk.auth.model.UserEntity;
-import com.aflk.auth.repository.AuthenticationRepository;
+import auth.model.CustomUserDetails;
+import auth.model.UserEntity;
+import auth.repository.AuthenticationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

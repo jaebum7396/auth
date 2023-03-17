@@ -1,8 +1,7 @@
-package com.aflk.auth.configuration;
+package auth.configuration;
 
-import com.aflk.auth.jwt.JwtProvider;
-import com.aflk.auth.jwt.JwtAuthenticationFilter;
-import com.aflk.auth.jwt.JwtProvider;
+import auth.jwt.JwtAuthenticationFilter;
+import auth.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,8 +1,8 @@
-package com.aflk.auth.controller;
+package auth.controller;
 
-import com.aflk.auth.model.LoginRequest;
-import com.aflk.auth.model.ResponseResult;
-import com.aflk.auth.service.AuthenticationService;
+import auth.model.LoginRequest;
+import auth.model.ResponseResult;
+import auth.service.AuthenticationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

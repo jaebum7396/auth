@@ -10,7 +10,7 @@ eureka:
 
 spring:
   application:
-    name: aflk.auth
+    name: auth
   datasource:
     driver-class-name: org.h2.Driver
     username: sa

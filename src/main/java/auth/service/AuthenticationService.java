@@ -1,12 +1,12 @@
-package com.aflk.auth.service;
+package auth.service;
 
-import com.aflk.auth.jwt.JwtProvider;
-import com.aflk.auth.model.CustomUserDetails;
-import com.aflk.auth.model.LoginRequest;
-import com.aflk.auth.model.ResponseResult;
-import com.aflk.auth.model.UserEntity;
-import com.aflk.auth.repository.AuthenticationRepository;
-import com.aflk.auth.utils.AES128Util;
+import auth.jwt.JwtProvider;
+import auth.model.CustomUserDetails;
+import auth.model.LoginRequest;
+import auth.model.ResponseResult;
+import auth.model.UserEntity;
+import auth.repository.AuthenticationRepository;
+import auth.utils.AES128Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,8 @@ public class AuthenticationService implements UserDetailsService {
     AuthenticationRepository authenticationRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired JwtProvider jwtProvider;
+    @Autowired
+    JwtProvider jwtProvider;
     private final AES128Util aes128Util = new AES128Util();
     public ResponseEntity login(LoginRequest loginRequest) throws Exception {
         ResponseResult responseResult;

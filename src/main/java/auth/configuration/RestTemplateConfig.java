@@ -1,4 +1,4 @@
-package com.aflk.auth.configuration;
+package auth.configuration;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

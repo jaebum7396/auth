@@ -1,4 +1,4 @@
-package com.aflk.auth.model;
+package auth.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

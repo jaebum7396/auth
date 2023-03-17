@@ -1,4 +1,4 @@
-package com.aflk.auth.model;
+package auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

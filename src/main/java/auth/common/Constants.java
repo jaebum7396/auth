@@ -1,4 +1,4 @@
-package com.aflk.auth.common;
+package auth.common;
 
 public final class Constants {
 }

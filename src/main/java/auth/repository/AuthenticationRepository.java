@@ -1,6 +1,6 @@
-package com.aflk.auth.repository;
+package auth.repository;
 
-import com.aflk.auth.model.UserEntity;
+import auth.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.aflk.auth.jwt;
+package auth.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,7 +15,8 @@ import java.io.IOException;
  * Jwt가 유효성을 검증하는 Filter
  */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    @Autowired JwtProvider jwtProvider;
+    @Autowired
+    JwtProvider jwtProvider;
     public JwtAuthenticationFilter(JwtProvider jwtProvider) {
         this.jwtProvider = jwtProvider;
     }

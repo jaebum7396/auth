@@ -1,7 +1,7 @@
-package com.aflk.auth.jwt;
+package auth.jwt;
 
-import com.aflk.auth.model.AuthEntity;
-import com.aflk.auth.service.CustomUserDetailsService;
+import auth.model.AuthEntity;
+import auth.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +34,8 @@ public class JwtProvider {
     private final long ACCESS_EXPIRED_TIME = 1000L * 60 * 60;
     @Value("${token.refresh-expired-time}")
     private final long REFRESH_EXPIRED_TIME = 1000L * 60 * 60;
-    @Autowired CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    CustomUserDetailsService customUserDetailsService;
     @PostConstruct
     protected void init() {
         secretKey = Keys.hmacShaKeyFor(salt.getBytes(StandardCharsets.UTF_8));

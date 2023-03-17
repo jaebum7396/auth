@@ -1,4 +1,4 @@
-package com.aflk.auth.configuration;
+package auth.configuration;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import lombok.extern.slf4j.Slf4j;

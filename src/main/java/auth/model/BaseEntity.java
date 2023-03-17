@@ -1,4 +1,4 @@
-package com.aflk.auth.model;
+package auth.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
