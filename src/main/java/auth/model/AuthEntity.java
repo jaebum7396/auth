@@ -15,8 +15,10 @@ public class AuthEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
+    @Column(name = "AUTH_CD")
     private Long authCd;
 
+    @Column(name = "AUTH_TYPE")
     private String authType;
 
     @JoinColumn(name = "userCd")
