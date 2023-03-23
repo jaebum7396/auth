@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -63,7 +64,7 @@ public class SecurityConfig {
         // 조건별로 요청 허용/제한 설정
         .authorizeRequests()
         // 회원가입과 로그인은 모두 승인
-        .antMatchers("/auth/login").permitAll()
+        .antMatchers("/login").permitAll()
         //스웨거
         .antMatchers("/swagger/**","/swagger-ui/**","/swagger-ui.html","/swagger-resources/**","/v2/api-docs").permitAll()
         // /admin으로 시작하는 요청은 ADMIN 권한이 있는 유저에게만 허용
@@ -90,11 +91,7 @@ public class SecurityConfig {
         .authenticationEntryPoint(new AuthenticationEntryPoint() {
             @Override
             public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-                // 인증문제가 발생했을 때 이 부분을 호출한다.
-                response.setStatus(401);
-                response.setCharacterEncoding("utf-8");
-                response.setContentType("text/html; charset=UTF-8");
-                response.getWriter().write("인증되지 않은 사용자입니다.");
+            	throw new BadCredentialsException("잘못된 접근입니다.");
             }
         });
         return http.build();

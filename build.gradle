@@ -31,7 +31,7 @@ dependencies {
 	
 	//data
 	//runtimeOnly 'com.h2database:h2'
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.32'
+	implementation 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

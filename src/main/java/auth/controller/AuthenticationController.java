@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     @Autowired
     AuthenticationService authenticationService;
-    @PostMapping(value = "/auth/login")
+    @PostMapping(value = "/login")
     @Operation(summary="로그인", description="가입한 회원을 로그인 하는 API")
     @ApiResponses({
         @ApiResponse(code = 200, message="ok",response = ResponseResult.class),
