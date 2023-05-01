@@ -1,6 +1,6 @@
 package auth.jwt;
 
-import auth.model.AuthEntity;
+import auth.model.Auth;
 import auth.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -41,7 +41,7 @@ public class JwtProvider {
         secretKey = Keys.hmacShaKeyFor(salt.getBytes(StandardCharsets.UTF_8));
     }
     // 토큰 생성
-    public String createToken(String account, List<AuthEntity> roles) {
+    public String createToken(String account, List<Auth> roles) {
         Claims claims = Jwts.claims().setSubject(account);
         claims.put("roles", roles);
         return Jwts.builder()

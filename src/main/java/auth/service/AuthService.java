@@ -3,9 +3,9 @@ package auth.service;
 import auth.jwt.JwtProvider;
 import auth.model.CustomUserDetails;
 import auth.model.LoginRequest;
-import auth.model.ResponseResult;
-import auth.model.UserEntity;
-import auth.repository.AuthenticationRepository;
+import auth.model.Response;
+import auth.model.User;
+import auth.repository.AuthRepository;
 import auth.utils.AES128Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +25,19 @@ import java.util.Map;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AuthenticationService implements UserDetailsService {
+public class AuthService implements UserDetailsService {
     @Autowired
-    AuthenticationRepository authenticationRepository;
+    AuthRepository authRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     JwtProvider jwtProvider;
     private final AES128Util aes128Util = new AES128Util();
     public ResponseEntity login(LoginRequest loginRequest) throws Exception {
-        ResponseResult responseResult;
+        Response responseResult;
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         try{
-            UserEntity userEntity = authenticationRepository.findByUserId(loginRequest.getUserId()).orElseThrow(() ->
+            User userEntity = authRepository.findByUserId(loginRequest.getUserId()).orElseThrow(() ->
                 new BadCredentialsException(loginRequest.getUserId()+": 아이디가 존재하지 않습니다."));
             if (!passwordEncoder.matches(loginRequest.getUserPw(), userEntity.getUserPw())) {
                 throw new BadCredentialsException("잘못된 비밀번호입니다.");
@@ -47,7 +47,7 @@ public class AuthenticationService implements UserDetailsService {
             resultMap.put("roles", userEntity.getRoles());
             resultMap.put("token", jwtProvider.createToken(userEntity.getUserId(), userEntity.getRoles()));
 
-            responseResult = ResponseResult.builder()
+            responseResult = Response.builder()
                     .statusCode(HttpStatus.OK.value())
                     .status(HttpStatus.OK)
                     .message("로그인 성공")
@@ -55,7 +55,7 @@ public class AuthenticationService implements UserDetailsService {
             return ResponseEntity.ok().body(responseResult);
         }catch(BadCredentialsException be){
             System.out.println(be.getMessage());
-            responseResult = ResponseResult.builder()
+            responseResult = Response.builder()
                     .statusCode(HttpStatus.BAD_REQUEST.value())
                     .status(HttpStatus.BAD_REQUEST)
                     .message(be.getMessage())
@@ -63,7 +63,7 @@ public class AuthenticationService implements UserDetailsService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseResult);
         }catch(Exception e){
             e.printStackTrace();
-            responseResult = ResponseResult.builder()
+            responseResult = Response.builder()
                     .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .message("서버쪽 오류가 발생했습니다. 관리자에게 문의하십시오")
@@ -71,13 +71,13 @@ public class AuthenticationService implements UserDetailsService {
             return ResponseEntity.internalServerError().body(responseResult);
         }
     }
-    public boolean loginPasswordValidate(LoginRequest loginRequest, UserEntity userEntity) {
+    public boolean loginPasswordValidate(LoginRequest loginRequest, User userEntity) {
         boolean check = passwordEncoder.matches(loginRequest.getUserPw(), userEntity.getUserPw());
         return check;
     }
     @Override
     public UserDetails loadUserByUsername(String userNm) throws UsernameNotFoundException {
-        UserEntity userEntity = authenticationRepository.findByUserNm(userNm).orElseThrow(
+        User userEntity = authRepository.findByUserNm(userNm).orElseThrow(
             () -> new UsernameNotFoundException("Invalid authentication!")
         );
         return new CustomUserDetails(userEntity);

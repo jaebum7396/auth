@@ -15,10 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class MyInterceptor implements HandlerInterceptor{
-	
 	private Logger logger = LoggerFactory.getLogger(MyInterceptor.class);
-	
-	private String gatewayUri = "192.168.0.8:8000";
+	private String GATEWAY_URI;
+	public MyInterceptor(String GATEWAY_URI) {
+		this.GATEWAY_URI = GATEWAY_URI;
+	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -32,7 +33,7 @@ public class MyInterceptor implements HandlerInterceptor{
 	    }
     	
     	String requestUri = request.getHeader("x-forwarded-host");
-    	if(("".equals(requestUri)||requestUri == null||!requestUri.equals(gatewayUri))) {
+    	if(("".equals(requestUri)||requestUri == null||!requestUri.equals(GATEWAY_URI))) {
     		throw new BadCredentialsException("잘못된 접근입니다.");
     	}
 		return HandlerInterceptor.super.preHandle(request, response, handler);

@@ -1,8 +1,8 @@
 package auth.controller;
 
 import auth.model.LoginRequest;
-import auth.model.ResponseResult;
-import auth.service.AuthenticationService;
+import auth.model.Response;
+import auth.service.AuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "AuthenticationController")
 @Tag(name = "AuthenticationController", description = "회원가입, 로그인, 유저정보")
 @RestController
-public class AuthenticationController {
+public class AuthController {
     @Autowired
-    AuthenticationService authenticationService;
+    AuthService authService;
     @PostMapping(value = "/login")
     @Operation(summary="로그인", description="가입한 회원을 로그인 하는 API")
     @ApiResponses({
-        @ApiResponse(code = 200, message="ok",response = ResponseResult.class),
-        @ApiResponse(code = 400, message="잘못된 요청",response = ResponseResult.class),
-        @ApiResponse(code = 500, message="서버 에러",response = ResponseResult.class)
+        @ApiResponse(code = 200, message="ok",response = Response.class),
+        @ApiResponse(code = 400, message="잘못된 요청",response = Response.class),
+        @ApiResponse(code = 500, message="서버 에러",response = Response.class)
     })
     public ResponseEntity login(@RequestBody LoginRequest loginRequest) throws Exception {
-        return authenticationService.login(loginRequest);
+        return authService.login(loginRequest);
     }
 }
