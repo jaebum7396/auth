@@ -25,6 +25,7 @@ public class MyInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		log.info("===============================================");
         log.info("==================== BEGIN ====================");
+		System.out.println("GATEWAY_URI : " + GATEWAY_URI);
         Enumeration eHeader = request.getHeaderNames();
     	while (eHeader.hasMoreElements()) {
 	    	String key = (String)eHeader.nextElement();
